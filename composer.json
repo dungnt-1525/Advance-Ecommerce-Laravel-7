@@ -73,19 +73,19 @@
             "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "php artisan key:generate",
             "php artisan migrate",
+            "php artisan clear-compiled",
+            "chmod -R 777 public/",
             "npm install",
             "npm run production"
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php artisan optimize",
-            "php artisan clear-compiled",
-            "chmod -R 777 public/",
+            "php artisan optimize:clear",
             "@deploy"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php artisan optimize",
+            "php artisan optimize:clear",
             "@deploy"
         ]
     }
