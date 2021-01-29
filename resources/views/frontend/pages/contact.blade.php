@@ -17,7 +17,7 @@
 		</div>
 	</div>
 	<!-- End Breadcrumbs -->
-  
+
 	<!-- Start Contact -->
 	<section id="contact-us" class="contact-us section">
 		<div class="container">
@@ -51,13 +51,13 @@
 											<div class="form-group">
 												<label>Your Email<span>*</span></label>
 												<input name="email" type="email" id="email" placeholder="Enter email address">
-											</div>	
+											</div>
 										</div>
 										<div class="col-lg-6 col-12">
 											<div class="form-group">
 												<label>Your Phone<span>*</span></label>
 												<input id="phone" name="phone" type="number" placeholder="Enter your phone">
-											</div>	
+											</div>
 										</div>
 										<div class="col-12">
 											<div class="form-group message">
@@ -104,15 +104,15 @@
 			</div>
 	</section>
 	<!--/ End Contact -->
-	
+
 	<!-- Map Section -->
 	<div class="map-section">
 		<div id="myMap">
-			<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14130.857353934944!2d85.36529494999999!3d27.6952226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sne!2snp!4v1595323330171!5m2!1sne!2snp" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-		</div>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.1610008244693!2d105.78267705092557!3d20.9861823945368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135accb4dea1e3b%3A0x11e3d93ae6614fd1!2zTEs2QSwgTMOgbmcgVmnhu4d0IGtp4buBdSBDaMOidSDDgnUsIE3hu5kgTGFvLCBIw6AgxJDDtG5nLCBIw6AgTuG7mWksIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1611889564221!5m2!1sen!2s" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        </div>
 	</div>
 	<!--/ End Map Section -->
-	
+
 	<!-- Start Shop Newsletter  -->
 	@include('frontend.layouts.newsletter')
 	<!-- End Shop Newsletter -->
@@ -132,7 +132,7 @@
 		  </div>
 		</div>
 	</div>
-	
+
 	<!-- Modals error -->
 	<div class="modal fade" id="error" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">

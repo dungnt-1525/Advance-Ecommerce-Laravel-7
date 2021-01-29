@@ -12,10 +12,12 @@
 								<a href="index.html"><img src="{{asset('backend/img/logo2.png')}}" alt="#"></a>
 							</div>
 							@php
-								$settings=DB::table('settings')->get();
+								$settings = DB::table('settings')->get();
 							@endphp
 							<p class="text">@foreach($settings as $data) {{$data->short_des}} @endforeach</p>
-							<p class="call">Got Question? Call us 24/7<span><a href="tel:123456789">@foreach($settings as $data) {{$data->phone}} @endforeach</a></span></p>
+							<p class="call">Got Question? Call us 24/7
+                                <span><a href="tel:123456789">@foreach($settings as $data) {{$data->phone}} @endforeach</a></span>
+                            </p>
 						</div>
 						<!-- End Single Widget -->
 					</div>
@@ -54,9 +56,9 @@
 							<!-- Single Widget -->
 							<div class="contact">
 								<ul>
-									<li>@foreach($settings as $data) {{$data->address}} @endforeach</li>
-									<li>@foreach($settings as $data) {{$data->email}} @endforeach</li>
-									<li>@foreach($settings as $data) {{$data->phone}} @endforeach</li>
+									<li>@foreach($settings as $data) Address: {{$data->address}} @endforeach</li>
+									<li>@foreach($settings as $data) Email: {{$data->email}} @endforeach</li>
+									<li>@foreach($settings as $data) Phone: {{$data->phone}} @endforeach</li>
 								</ul>
 							</div>
 							<!-- End Single Widget -->
@@ -74,7 +76,7 @@
 					<div class="row">
 						<div class="col-lg-6 col-12">
 							<div class="left">
-								<p>Copyright © {{date('Y')}} <a href="https://github.com/Prajwal100" target="_blank">Prajwal Rai</a>  -  All Rights Reserved.</p>
+								<p>Copyright © {{date('Y')}} <a href="https://www.facebook.com/tuandungit.1712" target="_blank">TDT Company</a>  -  All Rights Reserved.</p>
 							</div>
 						</div>
 						<div class="col-lg-6 col-12">
@@ -88,7 +90,7 @@
 		</div>
 	</footer>
 	<!-- /End Footer Area -->
- 
+
 	<!-- Jquery -->
     <script src="{{asset('frontend/js/jquery.min.js')}}"></script>
     <script src="{{asset('frontend/js/jquery-migrate-3.0.0.js')}}"></script>
@@ -124,7 +126,7 @@
 	<!-- Active JS -->
 	<script src="{{asset('frontend/js/active.js')}}"></script>
 
-	
+
 	@stack('scripts')
 	<script>
 		setTimeout(function(){
@@ -140,14 +142,12 @@
 
 				$(this).siblings().toggleClass("show");
 
-
 				if (!$(this).next().hasClass('show')) {
-				$(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+				    $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
 				}
 				$(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
-				$('.dropdown-submenu .show').removeClass("show");
+				    $('.dropdown-submenu .show').removeClass("show");
 				});
-
 			});
 		});
 	  </script>
