@@ -27,7 +27,7 @@
 							<div class="form-main">
 								<div class="title">
 									@php
-										$settings=DB::table('settings')->get();
+										$settings = DB::table('settings')->get();
 									@endphp
 									<h4>Get in touch</h4>
 									<h3>Write us a message @auth @else<span style="font-size:12px;" class="text-danger">[You need to login first]</span>@endauth</h3>
