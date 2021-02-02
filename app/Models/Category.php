@@ -52,10 +52,11 @@ class Category extends Model
     }
 
     public static function countActiveCategory() {
-        $data=Category::where('status', 'active')->count();
+        $data = Category::where('status', 'active')->count();
         if ($data) {
             return $data;
         }
+
         return 0;
     }
 }
