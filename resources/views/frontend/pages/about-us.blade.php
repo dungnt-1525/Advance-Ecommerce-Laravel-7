@@ -115,7 +115,7 @@
                     <div class="single-team">
                         <!-- Image -->
                         <div class="image">
-                            <img src="/storage/photos/team/team1.jpg" alt="#">
+                            <img src="/storage/photos/1/Team/team1.jpg" alt="#">
                         </div>
                         <!-- End Image -->
                         <div class="info-head">
@@ -143,7 +143,7 @@
                     <div class="single-team">
                         <!-- Image -->
                         <div class="image">
-                            <img src="/storage/photos/team/team2.jpg" alt="#">
+                            <img src="/storage/photos/1/Team/team2.jpg" alt="#">
                         </div>
                         <!-- End Image -->
                         <div class="info-head">
@@ -171,7 +171,7 @@
                     <div class="single-team">
                         <!-- Image -->
                         <div class="image">
-                            <img src="/storage/photos/team/team3.jpg" alt="#">
+                            <img src="/storage/photos/1/Team/team3.jpg" alt="#">
                         </div>
                         <!-- End Image -->
                         <div class="info-head">
@@ -199,7 +199,7 @@
                     <div class="single-team">
                         <!-- Image -->
                         <div class="image">
-                            <img src="/storage/photos/team/team4.jpg" alt="#">
+                            <img src="/storage/photos/1/Team/team4.jpg" alt="#">
                         </div>
                         <!-- End Image -->
                         <div class="info-head">
