@@ -4,9 +4,9 @@
  <!-- DataTales Example -->
  <div class="card shadow mb-4">
      <div class="row">
-         <div class="col-md-12">
-            @include('backend.layouts.notification')
-         </div>
+       <div class="col-md-12">
+         @include('backend.layouts.notification')
+       </div>
      </div>
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary float-left">Category Lists</h6>
@@ -14,7 +14,7 @@
     </div>
     <div class="card-body">
       <div class="table-responsive">
-        @if(count($categories)>0)
+        @if (count($categories) > 0)
         <table class="table table-bordered" id="banner-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
@@ -41,43 +41,42 @@
             </tr>
           </tfoot>
           <tbody>
-           
-            @foreach($categories as $category)   
-              @php 
-              $parent_cats=DB::table('categories')->select('title')->where('id',$category->parent_id)->get();
-              // dd($parent_cats);
 
+            @foreach ($categories as $category)
+              @php
+              $parent_cats = DB::table('categories')->select('title')->where('id', $category->parent_id)->get();
+              // dd($parent_cats);
               @endphp
                 <tr>
                     <td>{{$category->id}}</td>
                     <td>{{$category->title}}</td>
                     <td>{{$category->slug}}</td>
-                    <td>{{(($category->is_parent==1)? 'Yes': 'No')}}</td>
+                    <td>{{(($category->is_parent == 1)? 'Yes' : 'No')}}</td>
                     <td>
-                        @foreach($parent_cats as $parent_cat)
+                        @foreach ($parent_cats as $parent_cat)
                             {{$parent_cat->title}}
                         @endforeach
                     </td>
                     <td>
-                        @if($category->photo)
+                        @if ($category->photo)
                             <img src="{{$category->photo}}" class="img-fluid" style="max-width:80px" alt="{{$category->photo}}">
                         @else
                             <img src="{{asset('backend/img/thumbnail-default.jpg')}}" class="img-fluid" style="max-width:80px" alt="avatar.png">
                         @endif
                     </td>
                     <td>
-                        @if($category->status=='active')
+                        @if ($category->status == 'active')
                             <span class="badge badge-success">{{$category->status}}</span>
                         @else
                             <span class="badge badge-warning">{{$category->status}}</span>
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('category.edit',$category->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                    <form method="POST" action="{{route('category.destroy',[$category->id])}}">
-                      @csrf 
-                      @method('delete')
-                          <button class="btn btn-danger btn-sm dltBtn" data-id={{$category->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                        <a href="{{route('category.edit', $category->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="Edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                        <form method="POST" action="{{route('category.destroy',[$category->id])}}">
+                          @csrf
+                          @method('delete')
+                          <button class="btn btn-danger btn-sm dltBtn" data-id={{$category->id}} data-toggle="tooltip" data-placement="bottom" title="Delete" style="height:30px; width:30px;border-radius:50%"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
                     {{-- Delete Modal --}}
@@ -92,7 +91,7 @@
                             </div>
                             <div class="modal-body">
                               <form method="post" action="{{ route('categorys.destroy',$user->id) }}">
-                                @csrf 
+                                @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger" style="margin:auto; text-align:center">Parmanent delete user</button>
                               </form>
@@ -100,7 +99,7 @@
                           </div>
                         </div>
                     </div> --}}
-                </tr>  
+                </tr>
             @endforeach
           </tbody>
         </table>
@@ -133,49 +132,47 @@
   <!-- Page level custom scripts -->
   <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
   <script>
-      
-      $('#banner-dataTable').DataTable( {
-            "columnDefs":[
-                {
-                    "orderable":false,
-                    "targets":[3,4,5]
-                }
-            ]
-        } );
-
-        // Sweet alert
-
-        function deleteData(id){
-            
+    $('#banner-dataTable').DataTable({
+      "columnDefs":[
+        {
+          "orderable": false,
+          "targets": [3,4,5]
         }
+      ]
+    });
+
+    // Sweet alert
+
+    function deleteData(id){
+
+    }
   </script>
   <script>
-      $(document).ready(function(){
+      $(document).ready(function() {
         $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
         });
-          $('.dltBtn').click(function(e){
-            var form=$(this).closest('form');
-              var dataID=$(this).data('id');
-              // alert(dataID);
-              e.preventDefault();
-              swal({
-                    title: "Are you sure?",
-                    text: "Once deleted, you will not be able to recover this data!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                       form.submit();
-                    } else {
-                        swal("Your data is safe!");
-                    }
-                });
-          })
+        $('.dltBtn').click(function(e) {
+          var form = $(this).closest('form');
+          var dataID = $(this).data('id');
+          // alert(dataID);
+          e.preventDefault();
+          swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          }).then((willDelete) => {
+            if (willDelete) {
+              form.submit();
+            } else {
+              swal("Your data is safe!");
+            }
+          });
+        })
       })
   </script>
 @endpush

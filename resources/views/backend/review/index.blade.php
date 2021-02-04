@@ -4,16 +4,16 @@
  <!-- DataTales Example -->
  <div class="card shadow mb-4">
      <div class="row">
-         <div class="col-md-12">
-            @include('backend.layouts.notification')
-         </div>
+       <div class="col-md-12">
+         @include('backend.layouts.notification')
+       </div>
      </div>
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary float-left">Review Lists</h6>
     </div>
     <div class="card-body">
       <div class="table-responsive">
-        @if(count($reviews)>0)
+        @if (count($reviews) > 0)
         <table class="table table-bordered" id="order-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
@@ -40,9 +40,9 @@
               </tr>
           </tfoot>
           <tbody>
-            @foreach($reviews as $review)  
-              @php 
-              $title=DB::table('products')->select('title')->where('id',$review->product_id)->get();
+            @foreach ($reviews as $review)
+              @php
+                $title = DB::table('products')->select('title')->where('id', $review->product_id)->get();
               @endphp
                 <tr>
                     <td>{{$review->id}}</td>
@@ -51,10 +51,10 @@
                     <td>{{$review->review}}</td>
                     <td>
                      <ul style="list-style:none">
-                          @for($i=1; $i<=5;$i++)
-                          @if($review->rate >=$i)
+                        @for ($i = 1; $i <= 5; $i++)
+                          @if ($review->rate >= $i)
                             <li style="float:left;color:#F7941D;"><i class="fa fa-star"></i></li>
-                          @else 
+                          @else
                             <li style="float:left;color:#F7941D;"><i class="far fa-star"></i></li>
                           @endif
                         @endfor
@@ -62,21 +62,21 @@
                     </td>
                     <td>{{$review->created_at->format('M d D, Y g: i a')}}</td>
                     <td>
-                        @if($review->status=='active')
+                        @if ($review->status == 'active')
                           <span class="badge badge-success">{{$review->status}}</span>
                         @else
                           <span class="badge badge-warning">{{$review->status}}</span>
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('review.edit',$review->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                        <a href="{{route('review.edit', $review->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="Edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
                         <form method="POST" action="{{route('review.destroy',[$review->id])}}">
-                          @csrf 
+                          @csrf
                           @method('delete')
-                              <button class="btn btn-danger btn-sm dltBtn" data-id={{$review->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                              <button class="btn btn-danger btn-sm dltBtn" data-id={{$review->id}} data-toggle="tooltip" data-placement="bottom" title="Delete" style="height:30px; width:30px;border-radius:50%"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
-                </tr>  
+                </tr>
             @endforeach
           </tbody>
         </table>
@@ -109,49 +109,48 @@
   <!-- Page level custom scripts -->
   <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
   <script>
-      
-      $('#order-dataTable').DataTable( {
-            "columnDefs":[
-                {
-                    "orderable":false,
-                    "targets":[5,6]
-                }
-            ]
-        } );
 
-        // Sweet alert
+      $('#order-dataTable').DataTable({
+        "columnDefs":[
+          {
+            "orderable": false,
+            "targets": [5,6]
+          }
+        ]
+      });
 
-        function deleteData(id){
-            
-        }
+      // Sweet alert
+
+      function deleteData(id){
+
+      }
   </script>
   <script>
-      $(document).ready(function(){
+      $(document).ready(function() {
         $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
         });
-          $('.dltBtn').click(function(e){
-            var form=$(this).closest('form');
-              var dataID=$(this).data('id');
-              // alert(dataID);
-              e.preventDefault();
-              swal({
-                    title: "Are you sure?",
-                    text: "Once deleted, you will not be able to recover this data!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                       form.submit();
-                    } else {
-                        swal("Your data is safe!");
-                    }
-                });
-          })
+        $('.dltBtn').click(function(e){
+        var form = $(this).closest('form');
+          var dataID = $(this).data('id');
+          // alert(dataID);
+          e.preventDefault();
+          swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          }).then((willDelete) => {
+            if (willDelete) {
+              form.submit();
+            } else {
+              swal("Your data is safe!");
+            }
+          });
+        })
       })
   </script>
 @endpush

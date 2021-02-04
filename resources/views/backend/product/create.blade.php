@@ -31,10 +31,9 @@
           @enderror
         </div>
 
-
         <div class="form-group">
           <label for="is_featured">Is Featured</label><br>
-          <input type="checkbox" name='is_featured' id='is_featured' value='1' checked> Yes                        
+          <input type="checkbox" name='is_featured' id='is_featured' value='1' checked> Yes
         </div>
               {{-- {{$categories}} --}}
 
@@ -42,7 +41,7 @@
           <label for="cat_id">Category <span class="text-danger">*</span></label>
           <select name="cat_id" id="cat_id" class="form-control">
               <option value="">--Select any category--</option>
-              @foreach($categories as $key=>$cat_data)
+              @foreach ($categories as $key => $cat_data)
                   <option value='{{$cat_data->id}}'>{{$cat_data->title}}</option>
               @endforeach
           </select>
@@ -90,7 +89,7 @@
 
           <select name="brand_id" class="form-control">
               <option value="">--Select Brand--</option>
-             @foreach($brands as $brand)
+             @foreach ($brands as $brand)
               <option value="{{$brand->id}}">{{$brand->title}}</option>
              @endforeach
           </select>
@@ -117,18 +116,18 @@
           <label for="inputPhoto" class="col-form-label">Photo <span class="text-danger">*</span></label>
           <div class="input-group">
               <span class="input-group-btn">
-                  <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
                   <i class="fa fa-picture-o"></i> Choose
-                  </a>
+                </a>
               </span>
-          <input id="thumbnail" class="form-control" type="text" name="photo" value="{{old('photo')}}">
-        </div>
-        <div id="holder" style="margin-top:15px;max-height:100px;"></div>
+              <input id="thumbnail" class="form-control" type="text" name="photo" value="{{old('photo')}}">
+          </div>
+          <div id="holder" style="margin-top:15px;max-height:100px;"></div>
           @error('photo')
           <span class="text-danger">{{$message}}</span>
           @enderror
         </div>
-        
+
         <div class="form-group">
           <label for="status" class="col-form-label">Status <span class="text-danger">*</span></label>
           <select name="status" class="form-control">
@@ -141,7 +140,7 @@
         </div>
         <div class="form-group mb-3">
           <button type="reset" class="btn btn-warning">Reset</button>
-           <button class="btn btn-success" type="submit">Submit</button>
+          <button class="btn btn-success" type="submit">Submit</button>
         </div>
       </form>
     </div>
@@ -164,16 +163,16 @@
     $(document).ready(function() {
       $('#summary').summernote({
         placeholder: "Write short description.....",
-          tabsize: 2,
-          height: 100
+        tabsize: 2,
+        height: 100
       });
     });
 
     $(document).ready(function() {
       $('#description').summernote({
         placeholder: "Write detail description.....",
-          tabsize: 2,
-          height: 150
+        tabsize: 2,
+        height: 150
       });
     });
     // $('select').selectpicker();
@@ -181,10 +180,10 @@
 </script>
 
 <script>
-  $('#cat_id').change(function(){
-    var cat_id=$(this).val();
+  $('#cat_id').change(function() {
+    var cat_id = $(this).val();
     // alert(cat_id);
-    if(cat_id !=null){
+    if (cat_id != null){
       // Ajax call
       $.ajax({
         url:"/admin/category/"+cat_id+"/child",
@@ -193,23 +192,21 @@
           id:cat_id
         },
         type:"POST",
-        success:function(response){
-          if(typeof(response) !='object'){
-            response=$.parseJSON(response)
+        success:function(response) {
+          if (typeof(response) != 'object') {
+            response = $.parseJSON(response)
           }
           // console.log(response);
-          var html_option="<option value=''>----Select sub category----</option>"
-          if(response.status){
-            var data=response.data;
+          var html_option = "<option value=''>----Select sub category----</option>"
+          if (response.status) {
+            var data = response.data;
             // alert(data);
-            if(response.data){
+            if (response.data) {
               $('#child_cat_div').removeClass('d-none');
-              $.each(data,function(id,title){
+              $.each(data, function(id, title) {
                 html_option +="<option value='"+id+"'>"+title+"</option>"
               });
-            }
-            else{
-            }
+            } else{}
           }
           else{
             $('#child_cat_div').addClass('d-none');
@@ -217,9 +214,7 @@
           $('#child_cat_id').html(html_option);
         }
       });
-    }
-    else{
-    }
+    } else{}
   })
 </script>
 @endpush

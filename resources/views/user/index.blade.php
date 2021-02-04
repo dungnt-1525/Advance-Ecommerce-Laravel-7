@@ -56,7 +56,7 @@
                   <div class="col-auto">
                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{\App\Models\Order::countActiveOrder()}}</div>
                   </div>
-                  
+
                 </div>
               </div>
               <div class="col-auto">
@@ -89,7 +89,7 @@
 
     <div class="row">
       @php
-          $orders=DB::table('orders')->where('user_id',auth()->user()->id)->paginate(10);
+        $orders = DB::table('orders')->where('user_id', auth()->user()->id)->paginate(10);
       @endphp
       <!-- Order -->
       <div class="col-xl-12 col-lg-12">
@@ -119,35 +119,35 @@
               </tr>
           </tfoot>
           <tbody>
-            @if(count($orders)>0)
-              @foreach($orders as $order)   
+            @if (count($orders) > 0)
+              @foreach ($orders as $order)
                 <tr>
                     <td>{{$order->id}}</td>
                     <td>{{$order->order_number}}</td>
                     <td>{{$order->first_name}} {{$order->last_name}}</td>
                     <td>{{$order->email}}</td>
                     <td>{{$order->quantity}}</td>
-                    <td>${{number_format($order->total_amount,2)}}</td>
+                    <td>${{number_format($order->total_amount, 2)}}</td>
                     <td>
-                        @if($order->status=='new')
+                        @if ($order->status == 'new')
                           <span class="badge badge-primary">{{$order->status}}</span>
-                        @elseif($order->status=='process')
+                        @elseif ($order->status == 'process')
                           <span class="badge badge-warning">{{$order->status}}</span>
-                        @elseif($order->status=='delivered')
+                        @elseif ($order->status == 'delivered')
                           <span class="badge badge-success">{{$order->status}}</span>
                         @else
                           <span class="badge badge-danger">{{$order->status}}</span>
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('user.order.show',$order->id)}}" class="btn btn-warning btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="view" data-placement="bottom"><i class="fas fa-eye"></i></a>
+                        <a href="{{route('user.order.show', $order->id)}}" class="btn btn-warning btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="View" data-placement="bottom"><i class="fas fa-eye"></i></a>
                         <form method="POST" action="{{route('user.order.delete',[$order->id])}}">
-                          @csrf 
+                          @csrf
                           @method('delete')
-                              <button class="btn btn-danger btn-sm dltBtn" data-id={{$order->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                            <button class="btn btn-danger btn-sm dltBtn" data-id={{$order->id}} data-toggle="tooltip" data-placement="bottom" title="Delete" style="height:30px; width:30px;border-radius:50%"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
-                </tr>  
+                </tr>
               @endforeach
               @else
                 <td colspan="8" class="text-center"><h4 class="my-4">You have no order yet!! Please order some products</h4></td>

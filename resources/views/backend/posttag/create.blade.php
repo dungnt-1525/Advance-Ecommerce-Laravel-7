@@ -18,8 +18,8 @@
         <div class="form-group">
           <label for="status" class="col-form-label">Status</label>
           <select name="status" class="form-control">
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
           </select>
           @error('status')
           <span class="text-danger">{{$message}}</span>
@@ -27,7 +27,7 @@
         </div>
         <div class="form-group mb-3">
           <button type="reset" class="btn btn-warning">Reset</button>
-           <button class="btn btn-success" type="submit">Submit</button>
+          <button class="btn btn-success" type="submit">Submit</button>
         </div>
       </form>
     </div>

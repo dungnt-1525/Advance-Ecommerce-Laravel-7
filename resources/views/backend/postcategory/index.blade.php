@@ -4,9 +4,9 @@
  <!-- DataTales Example -->
  <div class="card shadow mb-4">
      <div class="row">
-         <div class="col-md-12">
-            @include('backend.layouts.notification')
-         </div>
+       <div class="col-md-12">
+         @include('backend.layouts.notification')
+       </div>
      </div>
     <div class="card-header py-3">
       <h6 class="m-0 font-weight-bold text-primary float-left">Post Category Lists</h6>
@@ -14,7 +14,7 @@
     </div>
     <div class="card-body">
       <div class="table-responsive">
-        @if(count($postCategories)>0)
+        @if (count($postCategories) > 0)
         <table class="table table-bordered" id="post-category-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
@@ -35,25 +35,25 @@
               </tr>
           </tfoot>
           <tbody>
-            @foreach($postCategories as $data)   
+            @foreach ($postCategories as $data)
                 <tr>
                     <td>{{$data->id}}</td>
                     <td>{{$data->title}}</td>
                     <td>{{$data->slug}}</td>
                     <td>
-                        @if($data->status=='active')
+                        @if($data->status == 'active')
                             <span class="badge badge-success">{{$data->status}}</span>
                         @else
                             <span class="badge badge-warning">{{$data->status}}</span>
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('post-category.edit',$data->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                    <form method="POST" action="{{route('post-category.destroy',[$data->id])}}">
-                      @csrf 
-                      @method('delete')
-                          <button class="btn btn-danger btn-sm dltBtn" data-id={{$data->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
-                        </form>
+                      <a href="{{route('post-category.edit',$data->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="Edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                      <form method="POST" action="{{route('post-category.destroy', [$data->id])}}">
+                        @csrf
+                        @method('delete')
+                          <button class="btn btn-danger btn-sm dltBtn" data-id={{$data->id}} data-toggle="tooltip" data-placement="bottom" title="Delete" style="height:30px; width:30px;border-radius:50%"><i class="fas fa-trash-alt"></i></button>
+                      </form>
                     </td>
                     {{-- Delete Modal --}}
                     {{-- <div class="modal fade" id="delModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="#delModal{{$user->id}}Label" aria-hidden="true">
@@ -67,7 +67,7 @@
                             </div>
                             <div class="modal-body">
                               <form method="post" action="{{ route('banners.destroy',$user->id) }}">
-                                @csrf 
+                                @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger" style="margin:auto; text-align:center">Parmanent delete user</button>
                               </form>
@@ -75,7 +75,7 @@
                           </div>
                         </div>
                     </div> --}}
-                </tr>  
+                </tr>
             @endforeach
           </tbody>
         </table>
@@ -108,49 +108,48 @@
   <!-- Page level custom scripts -->
   <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
   <script>
-      
-      $('#post-category-dataTable').DataTable( {
-            "columnDefs":[
-                {
-                    "orderable":false,
-                    "targets":[3,4]
-                }
-            ]
-        } );
 
-        // Sweet alert
+      $('#post-category-dataTable').DataTable({
+        "columnDefs":[
+          {
+            "orderable": false,
+            "targets":  [3,4]
+          }
+        ]
+      });
 
-        function deleteData(id){
-            
-        }
+      // Sweet alert
+
+      function deleteData(id){
+
+      }
   </script>
   <script>
-      $(document).ready(function(){
+      $(document).ready(function() {
         $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
         });
-          $('.dltBtn').click(function(e){
-            var form=$(this).closest('form');
-              var dataID=$(this).data('id');
-              // alert(dataID);
-              e.preventDefault();
-              swal({
-                    title: "Are you sure?",
-                    text: "Once deleted, you will not be able to recover this data!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                       form.submit();
-                    } else {
-                        swal("Your data is safe!");
-                    }
-                });
-          })
+        $('.dltBtn').click(function(e) {
+          var form = $(this).closest('form');
+          var dataID = $(this).data('id');
+          // alert(dataID);
+          e.preventDefault();
+          swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          }).then((willDelete) => {
+            if (willDelete) {
+              form.submit();
+            } else {
+              swal("Your data is safe!");
+            }
+          });
+        })
       })
   </script>
 @endpush

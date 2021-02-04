@@ -118,18 +118,18 @@
         </tr>
       </thead>
       <tbody>
-      @foreach($order->cart_info as $cart)
-      @php 
-        $product=DB::table('products')->select('title')->where('id',$cart->product_id)->get();
+      @foreach ($order->cart_info as $cart)
+      @php
+        $product = DB::table('products')->select('title')->where('id', $cart->product_id)->get();
       @endphp
         <tr>
           <td><span>
-              @foreach($product as $pro)
+              @foreach ($product as $pro)
                 {{$pro->title}}
               @endforeach
             </span></td>
-          <td>x{{$cart->quantity}}</td>
-          <td><span>${{number_format($cart->price,2)}}</span></td>
+          <td>x {{$cart->quantity}}</td>
+          <td><span>${{number_format($cart->price, 2)}}</span></td>
         </tr>
       @endforeach
       </tbody>
@@ -137,7 +137,7 @@
         <tr>
           <th scope="col" class="empty"></th>
           <th scope="col" class="text-right">Subtotal:</th>
-          <th scope="col"> <span>${{number_format($order->sub_total,2)}}</span></th>
+          <th scope="col"> <span>${{number_format($order->sub_total, 2)}}</span></th>
         </tr>
       {{-- @if(!empty($order->coupon))
         <tr>
@@ -149,14 +149,14 @@
         <tr>
           <th scope="col" class="empty"></th>
           <th scope="col" class="text-right ">Shipping:</th>
-          <th><span>${{number_format($order->delivery_charge,2)}}</span></th>
+          <th><span>${{number_format($order->delivery_charge, 2)}}</span></th>
         </tr>
         <tr>
           <th scope="col" class="empty"></th>
           <th scope="col" class="text-right">Total:</th>
           <th>
             <span>
-                ${{number_format($order->total_amount,2)}}
+                ${{number_format($order->total_amount, 2)}}
             </span>
           </th>
         </tr>

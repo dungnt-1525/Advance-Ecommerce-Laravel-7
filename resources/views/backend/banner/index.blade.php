@@ -14,7 +14,7 @@
     </div>
     <div class="card-body">
       <div class="table-responsive">
-        @if(count($banners)>0)
+        @if (count($banners) > 0)
         <table class="table table-bordered" id="banner-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
@@ -37,7 +37,7 @@
               </tr>
           </tfoot>
           <tbody>
-            @foreach($banners as $banner)   
+            @foreach ($banners as $banner)
                 <tr>
                     <td>{{$banner->id}}</td>
                     <td>{{$banner->title}}</td>
@@ -50,18 +50,18 @@
                         @endif
                     </td>
                     <td>
-                        @if($banner->status=='active')
+                        @if ($banner->status == 'active')
                             <span class="badge badge-success">{{$banner->status}}</span>
                         @else
                             <span class="badge badge-warning">{{$banner->status}}</span>
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('banner.edit',$banner->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                        <form method="POST" action="{{route('banner.destroy',[$banner->id])}}">
-                          @csrf 
+                        <a href="{{route('banner.edit', $banner->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="Edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                        <form method="POST" action="{{route('banner.destroy', [$banner->id])}}">
+                          @csrf
                           @method('delete')
-                              <button class="btn btn-danger btn-sm dltBtn" data-id={{$banner->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                            <button class="btn btn-danger btn-sm dltBtn" data-id={{$banner->id}} data-toggle="tooltip" data-placement="bottom" title="Delete" style="height:30px; width:30px; border-radius:50%"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
                     {{-- Delete Modal --}}
@@ -76,7 +76,7 @@
                             </div>
                             <div class="modal-body">
                               <form method="post" action="{{ route('banners.destroy',$user->id) }}">
-                                @csrf 
+                                @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger" style="margin:auto; text-align:center">Parmanent delete user</button>
                               </form>
@@ -84,7 +84,7 @@
                           </div>
                         </div>
                     </div> --}}
-                </tr>  
+                </tr>
             @endforeach
           </tbody>
         </table>
@@ -102,7 +102,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
   <style>
       div.dataTables_wrapper div.dataTables_paginate{
-          display: none;
+        display: none;
       }
       .zoom {
         transition: transform .2s; /* Animation */
@@ -124,48 +124,46 @@
   <!-- Page level custom scripts -->
   <script src="{{asset('backend/js/demo/datatables-demo.js')}}"></script>
   <script>
-      
-      $('#banner-dataTable').DataTable( {
-            "columnDefs":[
-                {
-                    "orderable":false,
-                    "targets":[3,4,5]
-                }
-            ]
-        } );
+      $('#banner-dataTable').DataTable({
+        "columnDefs":[
+          {
+            "orderable": false,
+            "targets": [3,4,5]
+          }
+        ]
+      });
 
-        // Sweet alert
+      // Sweet alert
 
-        function deleteData(id){
-            
-        }
+      function deleteData(id) {
+
+      }
   </script>
   <script>
-      $(document).ready(function(){
+      $(document).ready(function() {
         $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
         });
-          $('.dltBtn').click(function(e){
-            var form=$(this).closest('form');
-              var dataID=$(this).data('id');
-              // alert(dataID);
-              e.preventDefault();
+          $('.dltBtn').click(function(e) {
+            var form = $(this).closest('form');
+            var dataID = $(this).data('id');
+            // alert(dataID);
+            e.preventDefault();
               swal({
-                    title: "Are you sure?",
-                    text: "Once deleted, you will not be able to recover this data!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                })
-                .then((willDelete) => {
-                    if (willDelete) {
-                       form.submit();
-                    } else {
-                        swal("Your data is safe!");
-                    }
-                });
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover this data!",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              }).then((willDelete) => {
+                if (willDelete) {
+                  form.submit();
+                } else {
+                  swal("Your data is safe!");
+                }
+              });
           })
       })
   </script>

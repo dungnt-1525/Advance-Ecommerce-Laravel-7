@@ -4,14 +4,15 @@
 
 @section('main-content')
 <div class="card">
-<h5 class="card-header">Order       <a href="{{route('order.pdf',$order->id)}}" class=" btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-download fa-sm text-white-50"></i> Generate PDF</a>
+  <h5 class="card-header">Order
+    <a href="{{route('order.pdf', $order->id)}}" class=" btn btn-sm btn-primary shadow-sm float-right"><i class="fas fa-download fa-sm text-white-50"></i> Generate PDF</a>
   </h5>
   <div class="card-body">
-    @if($order)
+    @if ($order)
     <table class="table table-striped table-hover">
       @php
-          $shipping_charge=DB::table('shippings')->where('id',$order->shipping_id)->pluck('price');
-      @endphp 
+        $shipping_charge = DB::table('shippings')->where('id', $order->shipping_id)->pluck('price');
+      @endphp
       <thead>
         <tr>
             <th>S.N.</th>
@@ -32,28 +33,27 @@
             <td>{{$order->first_name}} {{$order->last_name}}</td>
             <td>{{$order->email}}</td>
             <td>{{$order->quantity}}</td>
-            <td>@foreach($shipping_charge as $data) $ {{number_format($data,2)}} @endforeach</td>
-            <td>${{number_format($order->total_amount,2)}}</td>
+            <td>@foreach($shipping_charge as $data) $ {{number_format($data, 2)}} @endforeach</td>
+            <td>${{number_format($order->total_amount, 2)}}</td>
             <td>
-                @if($order->status=='new')
+                @if ($order->status == 'new')
                   <span class="badge badge-primary">{{$order->status}}</span>
-                @elseif($order->status=='process')
+                @elseif ($order->status == 'process')
                   <span class="badge badge-warning">{{$order->status}}</span>
-                @elseif($order->status=='delivered')
+                @elseif ($order->status == 'delivered')
                   <span class="badge badge-success">{{$order->status}}</span>
                 @else
                   <span class="badge badge-danger">{{$order->status}}</span>
                 @endif
             </td>
             <td>
-                <a href="{{route('order.edit',$order->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
-                <form method="POST" action="{{route('order.destroy',[$order->id])}}">
-                  @csrf 
+                <a href="{{route('order.edit',$order->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="Edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
+                <form method="POST" action="{{route('order.destroy', [$order->id])}}">
+                  @csrf
                   @method('delete')
-                      <button class="btn btn-danger btn-sm dltBtn" data-id={{$order->id}} style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" data-placement="bottom" title="Delete"><i class="fas fa-trash-alt"></i></button>
+                    <button class="btn btn-danger btn-sm dltBtn" data-id={{$order->id}} data-toggle="tooltip" data-placement="bottom" title="Delete" style="height:30px; width:30px;border-radius:50%"><i class="fas fa-trash-alt"></i></button>
                 </form>
             </td>
-          
         </tr>
       </tbody>
     </table>
@@ -66,43 +66,43 @@
               <h4 class="text-center pb-4">ORDER INFORMATION</h4>
               <table class="table">
                     <tr class="">
-                        <td>Order Number</td>
-                        <td> : {{$order->order_number}}</td>
+                        <td>Order Number :</td>
+                        <td>{{$order->order_number}}</td>
                     </tr>
                     <tr>
-                        <td>Order Date</td>
-                        <td> : {{$order->created_at->format('D d M, Y')}} at {{$order->created_at->format('g : i a')}} </td>
+                        <td>Order Date :</td>
+                        <td>{{$order->created_at->format('D d M, Y')}} at {{$order->created_at->format('g : i a')}} </td>
                     </tr>
                     <tr>
-                        <td>Quantity</td>
-                        <td> : {{$order->quantity}}</td>
+                        <td>Quantity :</td>
+                        <td>{{$order->quantity}}</td>
                     </tr>
                     <tr>
-                        <td>Order Status</td>
-                        <td> : {{$order->status}}</td>
+                        <td>Order Status :</td>
+                        <td>{{$order->status}}</td>
                     </tr>
                     <tr>
                       @php
-                          $shipping_charge=DB::table('shippings')->where('id',$order->shipping_id)->pluck('price');
+                          $shipping_charge = DB::table('shippings')->where('id', $order->shipping_id)->pluck('price');
                       @endphp
-                        <td>Shipping Charge</td>
-                        <td> : $ {{number_format($shipping_charge[0],2)}}</td>
+                        <td>Shipping Charge :</td>
+                        <td> $ {{number_format($shipping_charge[0], 2)}}</td>
                     </tr>
                     <tr>
-                      <td>Coupon</td>
-                      <td> : $ {{number_format($order->coupon,2)}}</td>
+                      <td>Coupon :</td>
+                      <td> $ {{number_format($order->coupon, 2)}}</td>
                     </tr>
                     <tr>
-                        <td>Total Amount</td>
-                        <td> : $ {{number_format($order->total_amount,2)}}</td>
+                        <td>Total Amount :</td>
+                        <td> $ {{number_format($order->total_amount, 2)}}</td>
                     </tr>
                     <tr>
-                        <td>Payment Method</td>
-                        <td> : @if($order->payment_method=='cod') Cash on Delivery @else Paypal @endif</td>
+                        <td>Payment Method :</td>
+                        <td> @if($order->payment_method == 'cod') Cash on Delivery @else Paypal @endif</td>
                     </tr>
                     <tr>
-                        <td>Payment Status</td>
-                        <td> : {{$order->payment_status}}</td>
+                        <td>Payment Status :</td>
+                        <td> {{$order->payment_status}}</td>
                     </tr>
               </table>
             </div>
@@ -112,30 +112,35 @@
             <div class="shipping-info">
               <h4 class="text-center pb-4">SHIPPING INFORMATION</h4>
               <table class="table">
-                    <tr class="">
-                        <td>Full Name</td>
-                        <td> : {{$order->first_name}} {{$order->last_name}}</td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td> : {{$order->email}}</td>
-                    </tr>
-                    <tr>
-                        <td>Phone No.</td>
-                        <td> : {{$order->phone}}</td>
-                    </tr>
-                    <tr>
-                        <td>Address</td>
-                        <td> : {{$order->address1}}, {{$order->address2}}</td>
-                    </tr>
-                    <tr>
-                        <td>Country</td>
-                        <td> : {{$order->country}}</td>
-                    </tr>
-                    <tr>
-                        <td>Post Code</td>
-                        <td> : {{$order->post_code}}</td>
-                    </tr>
+                <tr class="">
+                    <td>Full Name :</td>
+                    <td> {{$order->first_name}} {{$order->last_name}}</td>
+                </tr>
+                <tr>
+                    <td>Email :</td>
+                    <td> {{$order->email}}</td>
+                </tr>
+                <tr>
+                    <td>Phone :</td>
+                    <td> {{$order->phone}}</td>
+                </tr>
+                <tr>
+                    <td>Address :</td>
+                    <td>
+                        {{$order->address1}}
+                        @if (isset($order->address2))
+                            OR {{ $order->address2}}
+                        @endif
+                    </td>
+                </tr>
+                <tr>
+                    <td>Country :</td>
+                    <td> {{$order->country}}</td>
+                </tr>
+                <tr>
+                    <td>Post Code :</td>
+                    <td> {{$order->post_code}}</td>
+                </tr>
               </table>
             </div>
           </div>
