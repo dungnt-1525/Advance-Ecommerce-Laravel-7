@@ -11,7 +11,7 @@ use App\Models\Cart;
 //use Illuminate\Support\Facades\Auth;
 // use Auth;
 
-class Helper {
+class Helpers {
     public static function messageList()
     {
         return Message::whereNull('read_at')->orderBy('created_at', 'desc')->get();
