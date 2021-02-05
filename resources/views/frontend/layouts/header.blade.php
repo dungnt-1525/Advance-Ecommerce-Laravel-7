@@ -73,7 +73,7 @@
                         <div class="search-bar">
                             <select>
                                 <option >All Category</option>
-                                @foreach(Helpers::getAllCategory() as $cat)
+                                @foreach(Helper::getAllCategory() as $cat)
                                     <option>{{$cat->title}}</option>
                                 @endforeach
                             </select>
@@ -102,18 +102,18 @@
                                 @endforeach
                             @endif
                             <a href="{{route('wishlist')}}" class="single-icon">
-                                <i class="fa fa-heart-o"></i> <span class="total-count">{{Helpers::wishlistCount()}}</span>
+                                <i class="fa fa-heart-o"></i> <span class="total-count">{{Helper::wishlistCount()}}</span>
                             </a>
                             <!-- Shopping Item -->
                             @auth
                                 <div class="shopping-item">
                                     <div class="dropdown-cart-header">
-                                        <span>{{count(Helpers::getAllProductFromWishlist())}} Items</span>
+                                        <span>{{count(Helper::getAllProductFromWishlist())}} Items</span>
                                         <a href="{{route('wishlist')}}">View Wishlist</a>
                                     </div>
                                     <ul class="shopping-list">
-                                        {{-- {{Helpers::getAllProductFromCart()}} --}}
-                                        @foreach(Helpers::getAllProductFromWishlist() as $data)
+                                        {{-- {{Helper::getAllProductFromCart()}} --}}
+                                        @foreach(Helper::getAllProductFromWishlist() as $data)
                                             @php
                                                 $photo = explode(',', $data->product['photo']);
                                             @endphp
@@ -128,7 +128,7 @@
                                     <div class="bottom">
                                         <div class="total">
                                             <span>Total</span>
-                                            <span class="total-amount">${{number_format(Helpers::totalWishlistPrice(), 2)}}</span>
+                                            <span class="total-amount">${{number_format(Helper::totalWishlistPrice(), 2)}}</span>
                                         </div>
                                         <a href="{{route('cart')}}" class="btn animate">Cart</a>
                                     </div>
@@ -140,17 +140,17 @@
                             <a href="{{route('wishlist')}}" class="single-icon"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                         </div> --}}
                         <div class="sinlge-bar shopping">
-                            <a href="{{route('cart')}}" class="single-icon"><i class="ti-bag"></i> <span class="total-count">{{Helpers::cartCount()}}</span></a>
+                            <a href="{{route('cart')}}" class="single-icon"><i class="ti-bag"></i> <span class="total-count">{{Helper::cartCount()}}</span></a>
                             <!-- Shopping Item -->
                             @auth
                                 <div class="shopping-item">
                                     <div class="dropdown-cart-header">
-                                        <span>{{count(Helpers::getAllProductFromCart())}} Items</span>
+                                        <span>{{count(Helper::getAllProductFromCart())}} Items</span>
                                         <a href="{{route('cart')}}">View Cart</a>
                                     </div>
                                     <ul class="shopping-list">
-                                        {{-- {{Helpers::getAllProductFromCart()}} --}}
-                                        @foreach(Helpers::getAllProductFromCart() as $data)
+                                        {{-- {{Helper::getAllProductFromCart()}} --}}
+                                        @foreach(Helper::getAllProductFromCart() as $data)
                                             @php
                                                 $photo = explode(',', $data->product['photo']);
                                             @endphp
@@ -165,7 +165,7 @@
                                     <div class="bottom">
                                         <div class="total">
                                             <span>Total</span>
-                                            <span class="total-amount">${{number_format(Helpers::totalCartPrice(), 2)}}</span>
+                                            <span class="total-amount">${{number_format(Helper::totalCartPrice(), 2)}}</span>
                                         </div>
                                         <a href="{{route('checkout')}}" class="btn animate">Checkout</a>
                                     </div>
@@ -193,7 +193,7 @@
                                             <li class="{{Request::path()=='home' ? 'active' : ''}}"><a href="{{route('home')}}">Home</a></li>
                                             <li class="{{Request::path()=='about-us' ? 'active' : ''}}"><a href="{{route('about-us')}}">About Us</a></li>
                                             <li class="@if(Request::path()=='product-grids'||Request::path()=='product-lists')  active  @endif"><a href="{{route('product-grids')}}">Products</a><span class="new">New</span></li>
-                                                {{Helpers::getHeaderCategory()}}
+                                                {{Helper::getHeaderCategory()}}
                                             <li class="{{Request::path()=='blog' ? 'active' : ''}}"><a href="{{route('blog')}}">Blog</a></li>
 
                                             <li class="{{Request::path()=='contact' ? 'active' : ''}}"><a href="{{route('contact')}}">Contact Us</a></li>

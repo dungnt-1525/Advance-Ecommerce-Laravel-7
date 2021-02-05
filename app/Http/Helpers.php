@@ -10,10 +10,9 @@ use App\Models\Order;
 use App\Models\Wishlist;
 use App\Models\Shipping;
 use App\Models\Cart;
-//use Illuminate\Support\Facades\Auth;
-// use Auth;
+ use Auth;
 
-class Helpers {
+class Helper {
     public static function messageList()
     {
         return Message::whereNull('read_at')->orderBy('created_at', 'desc')->get();
