@@ -232,6 +232,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Helper' => 'App\Http\Helper',
+        // unisharp
 
         // unisharp
         'Image' => Intervention\Image\Facades\Image::class,
