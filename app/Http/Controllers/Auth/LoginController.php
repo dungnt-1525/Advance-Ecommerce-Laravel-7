@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Socialite;
 use App\User;
 use Auth;
@@ -50,7 +51,7 @@ class LoginController extends Controller
         // dd($provider);
      return Socialite::driver($provider)->redirect();
     }
- 
+
     public function Callback($provider)
     {
         $userSocial =   Socialite::driver($provider)->stateless()->user();
@@ -66,8 +67,11 @@ class LoginController extends Controller
                 'image'         => $userSocial->getAvatar(),
                 'provider_id'   => $userSocial->getId(),
                 'provider'      => $provider,
+                'password'      => Hash::make(123456),
             ]);
-         return redirect()->route('home');
+
+            Auth::login($user);
+            return redirect('/')->with('success','You are login from 12121212 '.$provider.'.Password default is 123456');
         }
     }
 }
