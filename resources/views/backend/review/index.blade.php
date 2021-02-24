@@ -17,7 +17,7 @@
         <table class="table table-bordered" id="order-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
-              <th>S.N.</th>
+              <th>ID</th>
               <th>Review By</th>
               <th>Product Title</th>
               <th>Review</th>
@@ -29,7 +29,7 @@
           </thead>
           <tfoot>
             <tr>
-              <th>S.N.</th>
+              <th>ID</th>
               <th>Review By</th>
               <th>Product Title</th>
               <th>Review</th>
@@ -60,7 +60,7 @@
                         @endfor
                      </ul>
                     </td>
-                    <td>{{$review->created_at->format('M d D, Y g: i a')}}</td>
+                    <td>{{$review->created_at->format('d-m-Y g:i A')}}</td>
                     <td>
                         @if ($review->status == 'active')
                           <span class="badge badge-success">{{$review->status}}</span>

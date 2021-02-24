@@ -14,7 +14,9 @@
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Name</th>
+          <th scope="col">Read At</th>
           <th scope="col">Subject</th>
+          <th scope="col">Message</th>
           <th scope="col">Date</th>
           <th scope="col">Action</th>
         </tr>
@@ -23,9 +25,11 @@
         @foreach ($messages as $message)
         <tr class="@if($message->read_at) border-left-success @else bg-light border-left-warning @endif">
           <td scope="row">{{$loop->index + 1}}</td>
-          <td>{{$message->name}} {{$message->read_at}}</td>
+          <td>{{$message->name}}</td>
+          <td>{{$message->read_at}}</td>
           <td>{{$message->subject}}</td>
-          <td>{{$message->created_at->format('F d, Y h:i A')}}</td>
+          <td>{{ mb_substr(($message->message), 0, 15, 'UTF-8') }} ...</td>
+          <td>{{$message->created_at->format('d-m-Y h:i A')}}</td>
           <td>
             <a href="{{route('message.show', $message->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="View" data-placement="bottom"><i class="fas fa-eye"></i></a>
             <form method="POST" action="{{route('message.destroy', [$message->id])}}">

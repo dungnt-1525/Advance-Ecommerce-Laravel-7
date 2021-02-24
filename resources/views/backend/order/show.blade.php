@@ -15,7 +15,7 @@
       @endphp
       <thead>
         <tr>
-            <th>S.N.</th>
+            <th>ID</th>
             <th>Order No.</th>
             <th>Name</th>
             <th>Email</th>

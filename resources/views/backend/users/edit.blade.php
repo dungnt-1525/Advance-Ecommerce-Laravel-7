@@ -9,7 +9,7 @@
         @csrf
         @method('PATCH')
         <div class="form-group">
-          <label for="inputTitle" class="col-form-label">Name</label>
+          <label for="inputTitle" class="col-form-label">Name <span class="text-danger">*</span></label>
           <input id="inputTitle" type="text" name="name" placeholder="Enter name"  value="{{$user->name}}" class="form-control">
           @error('name')
           <span class="text-danger">{{$message}}</span>
@@ -17,7 +17,7 @@
         </div>
 
         <div class="form-group">
-          <label for="inputEmail" class="col-form-label">Email</label>
+          <label for="inputEmail" class="col-form-label">Email <span class="text-danger">*</span></label>
           <input id="inputEmail" type="email" name="email" placeholder="Enter email"  value="{{$user->email}}" class="form-control">
           @error('email')
           <span class="text-danger">{{$message}}</span>
@@ -52,7 +52,7 @@
           // dd($roles);
         @endphp
         <div class="form-group">
-            <label for="role" class="col-form-label">Role</label>
+            <label for="role" class="col-form-label">Role <span class="text-danger">*</span></label>
             <select name="role" class="form-control">
                 <option value="">-----Select Role-----</option>
                 @foreach($roles as $role)
@@ -65,7 +65,7 @@
           @enderror
           </div>
           <div class="form-group">
-            <label for="status" class="col-form-label">Status</label>
+            <label for="status" class="col-form-label">Status <span class="text-danger">*</span></label>
             <select name="status" class="form-control">
                 <option value="active" {{(($user->status == 'active') ? 'selected' : '')}}>Active</option>
                 <option value="inactive" {{(($user->status == 'inactive') ? 'selected' : '')}}>Inactive</option>

@@ -18,7 +18,7 @@
         <table class="table table-bordered" id="banner-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
-              <th>S.N.</th>
+              <th>ID</th>
               <th>Coupon Code</th>
               <th>Type</th>
               <th>Value</th>
@@ -28,7 +28,7 @@
           </thead>
           <tfoot>
             <tr>
-              <th>S.N.</th>
+              <th>ID</th>
               <th>Coupon Code</th>
               <th>Type</th>
               <th>Value</th>

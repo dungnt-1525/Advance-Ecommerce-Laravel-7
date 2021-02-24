@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\BroadcastMessage;
+
 class StatusNotification extends Notification
 {
     use Queueable;
@@ -18,7 +19,7 @@ class StatusNotification extends Notification
      */
     public function __construct($details)
     {
-        $this->details=$details;
+        $this->details = $details;
     }
 
     /**
@@ -54,25 +55,15 @@ class StatusNotification extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
-    // public function toArray($notifiable)
-    // {
-    //     return [
-    //         'title'=>$this->details['title'],
-    //         'actionURL'=>$this->details['actionURL'],
-    //         'fas'=>$this->details['fas']
-    //     ];
-    // }
     public function toArray($notifiable)
     {
         return [
-            'title'=>$this->details['title'],
-            'actionURL'=>$this->details['actionURL'],
-            'fas'=>$this->details['fas']
+            'title' => $this->details['title'],
+            'actionURL' => $this->details['actionURL'],
+            'fas' => $this->details['fas']
         ];
     }
 
-
-    
     /**
      * Get the broadcastable representation of the notification.
      *
@@ -89,7 +80,4 @@ class StatusNotification extends Notification
             'time' => date('F d, Y h:i A')
         ]);
     }
-
-
-    
 }

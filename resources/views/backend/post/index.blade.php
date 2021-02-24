@@ -18,7 +18,7 @@
         <table class="table table-bordered" id="product-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
-              <th>S.N.</th>
+              <th>ID</th>
               <th>Title</th>
               <th>Category</th>
               <th>Tag</th>
@@ -30,7 +30,7 @@
           </thead>
           <tfoot>
             <tr>
-              <th>S.N.</th>
+              <th>ID</th>
               <th>Title</th>
               <th>Category</th>
               <th>Tag</th>
@@ -53,7 +53,6 @@
                     <td>{{$post->title}}</td>
                     <td>{{$post->cat_info->title}}</td>
                     <td>{{$post->tags}}</td>
-
                     <td>
                       @foreach ($author_info as $data)
                           {{$data->name}}

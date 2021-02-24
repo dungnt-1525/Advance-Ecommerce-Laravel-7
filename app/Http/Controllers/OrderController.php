@@ -22,8 +22,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders=Order::orderBy('id','DESC')->paginate(10);
-        return view('backend.order.index')->with('orders',$orders);
+        $orders=Order::orderBy('id', 'DESC')->paginate(10);
+        return view('backend.order.index')->with('orders', $orders);
     }
 
     /**
@@ -39,7 +39,7 @@ class OrderController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -146,7 +146,7 @@ class OrderController extends Controller
         }
         Cart::where('user_id', auth()->user()->id)->where('order_id', null)->update(['order_id' => $order->id]);
 
-        // dd($users);        
+        // dd($users);
         request()->session()->flash('success','Your product successfully placed in order');
         return redirect()->route('home');
     }
@@ -159,9 +159,9 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        $order=Order::find($id);
+        $order = Order::find($id);
         // return $order;
-        return view('backend.order.show')->with('order',$order);
+        return view('backend.order.show')->with('order', $order);
     }
 
     /**
@@ -179,19 +179,19 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $order=Order::find($id);
-        $this->validate($request,[
+        $order = Order::find($id);
+        $this->validate($request, [
             'status'=>'required|in:new,process,delivered,cancel'
         ]);
-        $data=$request->all();
+        $data = $request->all();
         // return $request->status;
-        if($request->status=='delivered'){
+        if ($request->status=='delivered') {
             foreach($order->cart as $cart){
                 $product=$cart->product;
                 // return $product;
@@ -199,12 +199,11 @@ class OrderController extends Controller
                 $product->save();
             }
         }
-        $status=$order->fill($data)->save();
-        if($status){
-            request()->session()->flash('success','Successfully updated order');
-        }
-        else{
-            request()->session()->flash('error','Error while updating order');
+        $status = $order->fill($data)->save();
+        if ($status) {
+            request()->session()->flash('success', 'Successfully updated order');
+        } else {
+            request()->session()->flash('error', 'Error while updating order');
         }
         return redirect()->route('order.index');
     }
@@ -250,17 +249,17 @@ class OrderController extends Controller
             elseif($order->status=="process"){
                 request()->session()->flash('success','Your order is under processing please wait.');
                 return redirect()->route('home');
-    
+
             }
             elseif($order->status=="delivered"){
                 request()->session()->flash('success','Your order is successfully delivered.');
                 return redirect()->route('home');
-    
+
             }
             else{
                 request()->session()->flash('error','Your order canceled. please try again');
                 return redirect()->route('home');
-    
+
             }
         }
         else{
