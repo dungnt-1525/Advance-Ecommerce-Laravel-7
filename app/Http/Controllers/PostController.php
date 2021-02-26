@@ -20,7 +20,7 @@ class PostController extends Controller
     {
         $posts = Post::getAllPost();
         // return $posts;
-        return view('backend.post.index')->with('posts',$posts);
+        return view('backend.post.index')->with('posts', $posts);
     }
 
     /**
@@ -33,7 +33,7 @@ class PostController extends Controller
         $categories = PostCategory::get();
         $tags = PostTag::get();
         $users = User::get();
-        return view('backend.post.create')->with('users', $users)->with('categories', $categories)->with('tags',$tags);
+        return view('backend.post.create')->with('users', $users)->with('categories', $categories)->with('tags', $tags);
     }
 
     /**
@@ -133,13 +133,14 @@ class PostController extends Controller
         ]);
 
         $data = $request->all();
-
-        $slug = Str::slug($request->title);
-        $count = Post::where('slug', $slug)->count();
-        if ($count > 0) {
-            $slug = $slug.'-'.date('ymdis').'-'.rand(0,999);
+        if ($request->title != $post->title) {
+            $slug = Str::slug($request->title);
+            $count = Post::where('slug', $slug)->count();
+            if ($count > 0) {
+                $slug = $slug.'-'.date('ymdis').'-'.rand(0,999);
+            }
+            $data['slug'] = $slug;
         }
-        $data['slug'] = $slug;
 
         $tags = $request->input('tags');
         // return $tags;

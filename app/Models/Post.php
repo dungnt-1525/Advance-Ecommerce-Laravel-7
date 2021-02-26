@@ -53,7 +53,7 @@ class Post extends Model
 
     public static function getBlogByTag($slug) {
         // dd($slug);
-        return Post::where('tags', $slug)->paginate(8);
+        return Post::where('tags', 'like', '%' . $slug . '%')->paginate(8);
     }
 
     public static function countActivePost() {

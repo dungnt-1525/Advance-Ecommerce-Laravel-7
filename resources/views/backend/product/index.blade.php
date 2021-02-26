@@ -18,7 +18,7 @@
         <table class="table table-bordered" id="product-dataTable" width="100%" cellspacing="0">
           <thead>
             <tr>
-              <th>S.N.</th>
+              <th>ID</th>
               <th>Title</th>
               <th>Category</th>
               <th>Is Featured</th>
@@ -35,7 +35,7 @@
           </thead>
           <tfoot>
             <tr>
-              <th>S.N.</th>
+              <th>ID</th>
               <th>Title</th>
               <th>Category</th>
               <th>Is Featured</th>
@@ -54,17 +54,17 @@
 
             @foreach ($products as $product)
               @php
-              $sub_cat_info = DB::table('categories')->select('title')->where('id', $product->child_cat_id)->get();
+              $sub_cat_info = DB::table('categories')->select('title', 'slug')->where('id', $product->child_cat_id)->get();
               // dd($sub_cat_info);
               $brands = DB::table('brands')->select('title')->where('id', $product->brand_id)->get();
               @endphp
                 <tr>
                     <td>{{$product->id}}</td>
-                    <td>{{$product->title}}</td>
+                    <td><a href="{{route('product-detail', $product->slug)}}">{{$product->title}}</a></td>
                     <td>{{$product->cat_info['title']}}
                       <sub>
                         @foreach ($sub_cat_info as $data)
-                          {{$data->title}}
+                              <a href="{{route('product-sub-cat',[$product->cat_info['slug'],$data->slug])}}">{{$data->title}}</a>
                         @endforeach
                       </sub>
                     </td>

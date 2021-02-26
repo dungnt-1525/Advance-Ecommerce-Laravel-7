@@ -42,12 +42,12 @@
           <tbody>
             @foreach ($reviews as $review)
               @php
-                $title = DB::table('products')->select('title')->where('id', $review->product_id)->get();
+                $title = DB::table('products')->select('title', 'slug')->where('id', $review->product_id)->get();
               @endphp
                 <tr>
                     <td>{{$review->id}}</td>
                     <td>{{$review->user_info['name']}}</td>
-                    <td>@foreach($title as $data){{ $data->title}} @endforeach</td>
+                    <td>@foreach($title as $data) <a href="{{route('product-detail', $data->slug)}}">{{$data->title}}</a> @endforeach</td>
                     <td>{{$review->review}}</td>
                     <td>
                      <ul style="list-style:none">

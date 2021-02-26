@@ -19,11 +19,11 @@
         </div>
     </div>
     <!-- End Breadcrumbs -->
-            
+
     <!-- Shop Login -->
     <section class="shop login section">
         <div class="container">
-            <div class="row"> 
+            <div class="row">
                 <div class="col-lg-6 offset-lg-3 col-12">
                     <div class="login-form">
                         <h2>Login</h2>
@@ -64,7 +64,7 @@
                                         <label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">Remember me</label>
                                     </div>
                                     @if (Route::has('password.request'))
-                                        <a class="lost-pass" href="{{ route('password.reset') }}">
+                                        <a class="lost-pass" href="{{ route('password.request') }}">
                                             Lost your password?
                                         </a>
                                     @endif
@@ -103,6 +103,9 @@
     }
     .btn-google:hover{
         background:rgb(243, 26, 26) !important;
+    }
+    .shop.login .form .lost-pass {
+        color: #4e73df;
     }
 </style>
 @endpush

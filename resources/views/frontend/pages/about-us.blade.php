@@ -11,8 +11,8 @@
 				<div class="col-12">
 					<div class="bread-inner">
 						<ul class="bread-list">
-							<li><a href="index1.html">Home<i class="ti-arrow-right"></i></a></li>
-							<li class="active"><a href="blog-single.html">About Us</a></li>
+							<li><a href="{{route('home')}}">Home<i class="ti-arrow-right"></i></a></li>
+                            <li class="active"><a href="javascript:void(0);">About Us</a></li>
 						</ul>
 					</div>
 				</div>
@@ -40,9 +40,9 @@
                 </div>
                 <div class="col-lg-6 col-12">
                     <div class="about-img overlay">
-                        {{-- <div class="button">
-                            <a href="https://www.youtube.com/watch?v=nh2aYrGMrIE" class="video video-popup mfp-iframe"><i class="fa fa-play"></i></a>
-                        </div> --}}
+                         <div class="button">
+                            <a href="{{ $settings->first()->youtube }}" class="video video-popup mfp-iframe"><i class="fa fa-play"></i></a>
+                        </div>
                         <img src="@foreach($settings as $data) {{$data->photo}} @endforeach" alt="@foreach($settings as $data) {{$data->photo}} @endforeach">
                     </div>
                 </div>

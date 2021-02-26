@@ -38,7 +38,7 @@
             @foreach ($postTags as $data)
                 <tr>
                     <td>{{$data->id}}</td>
-                    <td>{{$data->title}}</td>
+                    <td><a href="{{route('blog.tag', $data->title)}}"> {{$data->title}}</td>
                     <td>{{$data->slug}}</td>
                     <td>
                         @if($data->status == 'active')

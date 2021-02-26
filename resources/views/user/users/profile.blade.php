@@ -39,7 +39,7 @@
                 <form class="border px-4 pt-2 pb-3" method="POST" action="{{route('user-profile-update',$profile->id)}}">
                     @csrf
                     <div class="form-group">
-                        <label for="inputTitle" class="col-form-label">Name</label>
+                        <label for="inputTitle" class="col-form-label">Name <span class="text-danger">*</span></label>
                       <input id="inputTitle" type="text" name="name" placeholder="Enter name"  value="{{$profile->name}}" class="form-control">
                       @error('name')
                       <span class="text-danger">{{$message}}</span>
@@ -70,7 +70,7 @@
                       </div>
                       <div class="form-group">
                           <label for="role" class="col-form-label">Role</label>
-                          <select name="role" class="form-control">
+                          <select disabled name="role" class="form-control">
                               <option value="">-----Select Role-----</option>
                                   <option value="admin" {{(($profile->role=='admin')? 'selected' : '')}}>Admin</option>
                                   <option value="user" {{(($profile->role=='user')? 'selected' : '')}}>User</option>

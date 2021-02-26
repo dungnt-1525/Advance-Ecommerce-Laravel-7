@@ -38,7 +38,7 @@
             @foreach($brands as $brand)
                 <tr>
                     <td>{{$brand->id}}</td>
-                    <td>{{$brand->title}}</td>
+                    <td><a href="{{route('product-brand',$brand->slug)}}">{{$brand->title}}</td>
                     <td>{{$brand->slug}}</td>
                     <td>
                         @if($brand->status == 'active')

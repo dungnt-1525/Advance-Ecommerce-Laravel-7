@@ -26,6 +26,7 @@
             <div class="row">
                 <div class="col-lg-8 col-12">
                     <div class="blog-single-main">
+                        @if ($post)
                         <div class="row">
                             <div class="col-12">
                                 <div class="image">
@@ -54,7 +55,7 @@
                                                         $tags = explode(',', $post->tags);
                                                     @endphp
                                                     @foreach ($tags as $tag)
-                                                        <li><a href="javascript:void(0);">{{$tag}}</a></li>
+                                                        <li><a href="{{route('blog.tag', $tag)}}">{{$tag}}</a></li>
                                                     @endforeach
                                                 </ul>
                                             </div>
@@ -122,6 +123,9 @@
                                 </div>
                             </div>
                         </div>
+                        @else
+                            <h5>No posts found!!!</h5>
+                        @endif
                     </div>
                 </div>
                 <div class="col-lg-4 col-12">

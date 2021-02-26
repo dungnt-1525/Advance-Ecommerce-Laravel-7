@@ -20,11 +20,13 @@ use Illuminate\Http\Request;
 
 class FrontendController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         return redirect()->route($request->user()->role);
     }
 
-    public function home() {
+    public function home()
+    {
         $featured = Product::where('status', 'active')->where('is_featured', 1)->orderBy('price', 'DESC')->limit(2)->get();
         $posts = Post::where('status', 'active')->orderBy('id', 'DESC')->limit(3)->get();
         $banners = Banner::where('status', 'active')->limit(3)->orderBy('id', 'DESC')->get();
@@ -41,11 +43,13 @@ class FrontendController extends Controller
                 ->with('category_lists', $category);
     }
 
-    public function aboutUs() {
+    public function aboutUs()
+    {
         return view('frontend.pages.about-us');
     }
 
-    public function contact() {
+    public function contact()
+    {
         return view('frontend.pages.contact');
     }
 
@@ -250,8 +254,9 @@ class FrontendController extends Controller
         }
     }
 
-    public function blog(){
-        $post=Post::query();
+    public function blog()
+    {
+        $post = Post::query();
 
         if(!empty($_GET['category'])){
             $slug=explode(',',$_GET['category']);
@@ -270,18 +275,19 @@ class FrontendController extends Controller
             // return $post;
         }
 
-        if(!empty($_GET['show'])){
-            $post=$post->where('status','active')->orderBy('id','DESC')->paginate($_GET['show']);
-        }
-        else{
-            $post=$post->where('status','active')->orderBy('id','DESC')->paginate(9);
+        if (!empty($_GET['show'])) {
+            $post = $post->where('status','active')->orderBy('id','DESC')->paginate($_GET['show']);
+        } else {
+            $post = $post->where('status','active')->orderBy('id','DESC')->paginate(9);
         }
         // $post=Post::where('status','active')->paginate(8);
-        $rcnt_post=Post::where('status','active')->orderBy('id','DESC')->limit(3)->get();
-        return view('frontend.pages.blog')->with('posts',$post)->with('recent_posts',$rcnt_post);
+        $rcnt_post = Post::where('status', 'active')->orderBy('id', 'DESC')->limit(3)->get();
+
+        return view('frontend.pages.blog')->with('posts', $post)->with('recent_posts', $rcnt_post);
     }
 
-    public function blogDetail($slug) {
+    public function blogDetail($slug)
+    {
         $post = Post::getPostBySlug($slug);
         $rcnt_post = Post::where('status', 'active')->orderBy('id', 'DESC')->limit(3)->get();
 
@@ -289,20 +295,22 @@ class FrontendController extends Controller
         return view('frontend.pages.blog-detail')->with('post', $post)->with('recent_posts', $rcnt_post);
     }
 
-    public function blogSearch(Request $request) {
+    public function blogSearch(Request $request)
+    {
         // return $request->all();
-        $rcnt_post = Post::where('status','active')->orderBy('id','DESC')->limit(3)->get();
-        $posts = Post::orwhere('title','like','%'.$request->search.'%')
-            ->orwhere('quote','like','%'.$request->search.'%')
-            ->orwhere('summary','like','%'.$request->search.'%')
-            ->orwhere('description','like','%'.$request->search.'%')
-            ->orwhere('slug','like','%'.$request->search.'%')
-            ->orderBy('id','DESC')
+        $rcnt_post = Post::where('status', 'active')->orderBy('id', 'DESC')->limit(3)->get();
+        $posts = Post::orwhere('title', 'like', '%'.$request->search.'%')
+            ->orwhere('quote', 'like', '%'.$request->search.'%')
+            ->orwhere('summary', 'like', '%'.$request->search.'%')
+            ->orwhere('description', 'like', '%'.$request->search.'%')
+            ->orwhere('slug', 'like', '%'.$request->search.'%')
+            ->orderBy('id', 'DESC')
             ->paginate(8);
 
         return view('frontend.pages.blog')->with('posts', $posts)->with('recent_posts', $rcnt_post);
     }
 
+    // Not found use where
     public function blogFilter(Request $request){
         $data=$request->all();
         // return $data;
@@ -334,16 +342,18 @@ class FrontendController extends Controller
         return redirect()->route('blog',$catURL.$tagURL);
     }
 
-    public function blogByCategory(Request $request) {
+    public function blogByCategory(Request $request)
+    {
         $post = PostCategory::getBlogByCategory($request->slug);
         $rcnt_post = Post::where('status', 'active')->orderBy('id', 'DESC')->limit(3)->get();
 
         return view('frontend.pages.blog')->with('posts', $post->post)->with('recent_posts', $rcnt_post);
     }
 
-    public function blogByTag(Request $request) {
-        // dd($request->slug);
-        $post=Post::getBlogByTag($request->slug);
+    public function blogByTag(Request $request)
+    {
+//         dd($request->slug);
+        $post = Post::getBlogByTag($request->slug);
         // return $post;
         $rcnt_post = Post::where('status', 'active')->orderBy('id', 'DESC')->limit(3)->get();
 
@@ -351,23 +361,26 @@ class FrontendController extends Controller
     }
 
     // Login
-    public function login(){
+    public function login()
+    {
         return view('frontend.pages.login');
     }
 
-    public function loginSubmit(Request $request) {
+    public function loginSubmit(Request $request)
+    {
         $data = $request->all();
         if (Auth::attempt(['email' => $data['email'], 'password' => $data['password'], 'status' => 'active'])) {
             Session::put('user', $data['email']);
             request()->session()->flash('success', 'Successfully login');
             return redirect()->route('home');
         } else {
-            request()->session()->flash('error', 'Invalid email and password pleas try again!');
+            request()->session()->flash('error', 'Invalid email and password please try again!');
             return redirect()->back();
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         Session::forget('user');
         Auth::logout();
         request()->session()->flash('success', 'Logout successfully');
@@ -375,16 +388,18 @@ class FrontendController extends Controller
         return back();
     }
 
-    public function register() {
+    public function register()
+    {
         return view('frontend.pages.register');
     }
 
-    public function registerSubmit(Request $request) {
+    public function registerSubmit(Request $request)
+    {
         // return $request->all();
         $this->validate($request, [
             'name' => 'string|required|min:2',
             'email' => 'string|required|unique:users,email',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:8|confirmed',
         ]);
         $data = $request->all();
         // dd($data);
@@ -400,7 +415,8 @@ class FrontendController extends Controller
         }
     }
 
-    public function create(array $data) {
+    public function create(array $data)
+    {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -410,10 +426,12 @@ class FrontendController extends Controller
     }
 
     // Reset password
-    public function showResetForm() {
+    public function showResetForm()
+    {
         return view('auth.passwords.old-reset');
     }
 
+    // Not working
     public function subscribe(Request $request) {
         if (! Newsletter::isSubscribed($request->email)) {
             Newsletter::subscribePending($request->email);

@@ -41,12 +41,12 @@
             @foreach ($comments as $comment)
             {{-- {{$comment}}   --}}
               @php
-              $title = DB::table('posts')->select('title')->where('id', $comment->post_id)->get();
+              $title = DB::table('posts')->select('title', 'slug')->where('id', $comment->post_id)->get();
               @endphp
                 <tr>
                     <td>{{$comment->id}}</td>
                     <td>{{$comment->user_info['name']}}</td>
-                    <td>@foreach($title as $data){{ $data->title}} @endforeach</td>
+                    <td>@foreach($title as $data) <a href="{{route('blog.detail', $data->slug)}}"> {{ $data->title}} @endforeach</td>
                     <td>{{$comment->comment}}</td>
                     <td>{{$comment->created_at->format('M d D, Y g: i a')}}</td>
                     <td>

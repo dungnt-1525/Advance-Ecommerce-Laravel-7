@@ -50,8 +50,8 @@
               @endphp
                 <tr>
                     <td>{{$post->id}}</td>
-                    <td>{{$post->title}}</td>
-                    <td>{{$post->cat_info->title}}</td>
+                    <td><a href="{{route('blog.detail', $post->slug)}}">{{$post->title}}</td>
+                    <td><a href="{{route('blog.category', $post->cat_info->slug)}}">{{$post->cat_info->title}}</td>
                     <td>{{$post->tags}}</td>
                     <td>
                       @foreach ($author_info as $data)

@@ -97,12 +97,15 @@ class PostCategoryController extends Controller
             'status' => 'required|in:active,inactive'
         ]);
         $data = $request->all();
-        $slug = Str::slug($request->title);
-        $count = PostCategory::where('slug', $slug)->count();
-        if ($count > 0) {
-            $slug = $slug.'-'.date('ymdis').'-'.rand(0,999);
+        if ($request->title != $postCategory->title) {
+            $slug = Str::slug($request->title);
+            $count = PostCategory::where('slug', $slug)->count();
+            if ($count > 0) {
+                $slug = $slug.'-'.date('ymdis').'-'.rand(0,999);
+            }
+            $data['slug'] = $slug;
         }
-        $data['slug'] = $slug;
+
         $status = $postCategory->fill($data)->save();
         if ($status) {
             request()->session()->flash('success', 'Post Category Successfully updated');
